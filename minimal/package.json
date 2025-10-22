@@ -1,5 +1,5 @@
 {
-  "name": "gcp-cloud-workstations-article",
+  "name": "minimal",
   "module": "index.ts",
   "type": "module",
   "private": true,
@@ -8,5 +8,9 @@
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "@pulumi/gcp": "^9.3.0",
+    "@pulumi/pulumi": "^3.203.0"
   }
 }
