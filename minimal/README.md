@@ -9,8 +9,7 @@ GCP project.
 ## Prerequisites (required tools)
 
 - Pulumi CLI (v3.x or newer): https://www.pulumi.com/docs/install/
-- Node.js 18+ (Pulumi Node.js runtime)
-- Bun 1.2+ (used as the package manager defined in Pulumi.yaml): https://bun.com
+- Bun 1.3+ (used as the package manager defined in Pulumi.yaml): https://bun.com
 - Google Cloud SDK (gcloud) OR a GCP service account key you can point to with
   `GOOGLE_APPLICATION_CREDENTIALS`:
     - https://cloud.google.com/sdk/docs/install

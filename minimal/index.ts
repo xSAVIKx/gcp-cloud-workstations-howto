@@ -27,7 +27,7 @@ const requiredServices = [
 
 const services = enableServices(requiredServices);
 
-export default function main() {
+export default async function main() {
   const wsNetwork = new gcp.compute.Network(
     "wsNetwork",
     {
@@ -77,8 +77,19 @@ export default function main() {
     },
     { provider: gcpProvider, dependsOn: services },
   );
+  const workstation = new gcp.workstations.Workstation(
+    "test-workstation",
+    {
+      workstationId: "test-workstation",
+      workstationConfigId: wsMinimalConfig.workstationConfigId,
+      workstationClusterId: wsCluster.workstationClusterId,
+      location: region,
+    },
+    { provider: gcpProvider, dependsOn: services },
+  );
   return {
     wsCluster: wsCluster.name,
     wsConfig: wsMinimalConfig.name,
+    workstation: workstation.host,
   };
 }
