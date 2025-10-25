@@ -23,3 +23,4 @@ jobs:
           gist_id: 78eaeb461417f265fda71771cf8bb872     # ID of the target gist
           file_path: minimal/index.ts  # path in your repo to upload
           gist_description: "GCP Cloud Workstations minimal setup with Pulumi, Typescript and Bun"
+          gist_file_name: index.ts
