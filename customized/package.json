@@ -1,0 +1,17 @@
+{
+  "name": "customized",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@biomejs/biome": "2.3.0",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@pulumi/gcp": "^9.3.0",
+    "@pulumi/pulumi": "^3.203.0"
+  }
+}
