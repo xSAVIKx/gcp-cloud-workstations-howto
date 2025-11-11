@@ -1,6 +1,6 @@
 FROM us-central1-docker.pkg.dev/cloud-workstations-images/predefined/code-oss:latest AS code-oss-image
 
-FROM europe-west2-docker.pkg.dev/cloud-workstations-images/predefined/webstorm:latest AS runtime
+FROM us-central1-docker.pkg.dev/cloud-workstations-images/predefined/webstorm:latest AS runtime
 
 # See https://github.com/helm/helm/issues/31229
 RUN rm /etc/apt/sources.list.d/helm-stable-debian.list
