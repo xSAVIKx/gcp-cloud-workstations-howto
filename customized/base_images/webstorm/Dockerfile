@@ -2,9 +2,6 @@ FROM us-central1-docker.pkg.dev/cloud-workstations-images/predefined/code-oss:la
 
 FROM us-central1-docker.pkg.dev/cloud-workstations-images/predefined/webstorm:latest AS runtime
 
-# See https://github.com/helm/helm/issues/31229
-RUN rm /etc/apt/sources.list.d/helm-stable-debian.list
-
 RUN apt update \
     && DEBIAN_FRONTEND=noninteractive apt install apt-utils software-properties-common unzip -fyq \
     && apt upgrade -fyq \
@@ -27,12 +24,7 @@ RUN apt update \
     && DEBIAN_FRONTEND=noninteractive apt install gh -yq \
     # Install lefthook \
     && curl -1sLf 'https://dl.cloudsmith.io/public/evilmartians/lefthook/setup.deb.sh' | sudo -E bash \
-    && DEBIAN_FRONTEND=noninteractive apt install lefthook -yq \
-    # Install Helm \
-    && curl -fsSL https://packages.buildkite.com/helm-linux/helm-debian/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null \
-    && echo "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list \
-    && apt update \
-    && DEBIAN_FRONTEND=noninteractive apt install helm -yq
+    && DEBIAN_FRONTEND=noninteractive apt install lefthook -yq
 
 
 # Install .env - https://plugins.jetbrains.com/plugin/9525--env-files
@@ -69,7 +61,7 @@ COPY --from=oven/bun:1.3 /usr/local/bin/bun /bin/
 RUN curl -fsSL https://bun.com/install | bash
 
 COPY 011_customize_user.sh 120_install_vs_code_extensions.sh /etc/workstation-startup.d/
-COPY customize_environment.sh /tmp/travelshift/customize_environment.sh
+COPY customize_environment.sh /tmp/customize_environment.sh
 RUN chmod +x /etc/workstation-startup.d/011_customize_user.sh \
     && chmod +x /etc/workstation-startup.d/120_install_vs_code_extensions.sh \
-    && chmod +x /tmp/travelshift/customize_environment.sh \
+    && chmod +x /tmp/customize_environment.sh \
