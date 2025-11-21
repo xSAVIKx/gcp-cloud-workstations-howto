@@ -8,6 +8,7 @@ import { GoogleAuth } from "google-auth-library";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const region = "us-central1";
+const stackName = pulumi.getStack();
 const gcpProvider = new gcp.Provider("gcpProvider", {
   project: gcp.config.project,
   region: region,
@@ -40,7 +41,7 @@ function defineRunnerSa() {
   const sa = new gcp.serviceaccount.Account(
     `wsRunnerSa`,
     {
-      accountId: `workstations-runner`,
+      accountId: `workstations-runner-${stackName}`,
       description: `Runs Cloud Workstations VMs`,
       displayName: `Workstations Runner Service Account`,
     },
@@ -99,7 +100,7 @@ function defineArtifactRegistry() {
     "dockerRegistry",
     {
       location: region,
-      repositoryId: "containers",
+      repositoryId: `containers-${stackName}`,
       description: "Private containers registry",
       format: "DOCKER",
       dockerConfig: {
@@ -143,7 +144,7 @@ export default async function main() {
     new gcp.workstations.WorkstationCluster(
       "developmentCluster",
       {
-        workstationClusterId: "customized-cluster",
+        workstationClusterId: `customized-cluster-${stackName}`,
         network: wsNetwork.id,
         subnetwork: wsSubnetwork.id,
         location: region,
@@ -160,7 +161,7 @@ export default async function main() {
   const wsCustomizedConfig = new gcp.workstations.WorkstationConfig(
     "wsCustomizedConfig",
     {
-      workstationConfigId: "customized-config",
+      workstationConfigId: `customized-config-${stackName}`,
       workstationClusterId: wsCluster.workstationClusterId,
       location: region,
       container: {
@@ -194,7 +195,7 @@ export default async function main() {
   const workstation = new gcp.workstations.Workstation(
     "customized-workstation",
     {
-      workstationId: "customized-workstation",
+      workstationId: `customized-workstation-${stackName}`,
       workstationConfigId: wsCustomizedConfig.workstationConfigId,
       workstationClusterId: wsCluster.workstationClusterId,
       location: region,
