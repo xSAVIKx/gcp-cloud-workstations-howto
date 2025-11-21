@@ -36,6 +36,38 @@ const requiredServices = [
 
 const services = enableServices(requiredServices);
 
+function defineRunnerSa() {
+  const sa = new gcp.serviceaccount.Account(
+    `wsRunnerSa`,
+    {
+      accountId: `workstations-runner`,
+      description: `Runs Cloud Workstations VMs`,
+      displayName: `Workstations Runner Service Account`,
+    },
+    {
+      provider: gcpProvider,
+      dependsOn: services,
+    },
+  );
+  const roles = [
+    "roles/iam.serviceAccountUser",
+    "roles/artifactregistry.reader",
+    "roles/writer",
+  ];
+  const iamRoles = roles.map((role) => {
+    return new gcp.projects.IAMMember(
+      `wsRunnerSa-role-${role.split("/")[1]}`,
+      {
+        role,
+        member: pulumi.interpolate`serviceAccount:${sa.email}`,
+        project: gcp.config.project || "",
+      },
+      { provider: gcpProvider, parent: sa },
+    );
+  });
+  return { sa, iamRoles };
+}
+
 function defineNetwork() {
   const wsNetwork = new gcp.compute.Network(
     "wsNetwork",
@@ -91,6 +123,7 @@ async function accessToken() {
 export default async function main() {
   const { wsNetwork, wsSubnetwork } = defineNetwork();
   const { artifactRegistry } = defineArtifactRegistry();
+  const { sa } = defineRunnerSa();
   const webstormImage = new docker.Image("webstormImage", {
     build: {
       context: `${__dirname}/base_images/webstorm`,
@@ -135,7 +168,16 @@ export default async function main() {
       },
       idleTimeout: "3600s",
       runningTimeout: "43200s",
-      host: { gceInstance: { machineType: "e2-standard-4" } },
+      host: {
+        gceInstance: {
+          machineType: "e2-standard-4",
+          serviceAccount: sa.email,
+          disableSsh: false,
+          serviceAccountScopes: [
+            "https://www.googleapis.com/auth/cloud-platform",
+          ],
+        },
+      },
       persistentDirectories: [
         {
           mountPath: "/home",
@@ -147,7 +189,7 @@ export default async function main() {
         },
       ],
     },
-    { provider: gcpProvider, dependsOn: services },
+    { provider: gcpProvider, dependsOn: services, deleteBeforeReplace: true },
   );
   const workstation = new gcp.workstations.Workstation(
     "customized-workstation",
