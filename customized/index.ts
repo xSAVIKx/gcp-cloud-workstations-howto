@@ -166,12 +166,15 @@ export default async function main() {
       location: region,
       container: {
         image: webstormImage.repoDigest,
+        env: {
+          JETBRAINS_READY_SERVER_PORT: "15382",
+        },
       },
       idleTimeout: "3600s",
       runningTimeout: "43200s",
       host: {
         gceInstance: {
-          machineType: "e2-standard-4",
+          machineType: "t2d-standard-4",
           serviceAccount: sa.email,
           disableSsh: false,
           serviceAccountScopes: [
