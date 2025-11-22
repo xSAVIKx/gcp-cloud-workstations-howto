@@ -170,7 +170,7 @@ export default async function main() {
           JETBRAINS_READY_SERVER_PORT: "15382",
         },
       },
-      idleTimeout: "3600s",
+      idleTimeout: "7200s",
       runningTimeout: "43200s",
       host: {
         gceInstance: {
