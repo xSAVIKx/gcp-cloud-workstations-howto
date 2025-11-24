@@ -1,5 +1,12 @@
 # minimal — Pulumi GCP Workstations (minimal example)
 
+Check out [Cloud Workstations: building reusable development environments in cloud][article-1]
+article for a complete and step-by-step tutorial.
+
+[![article_front_image.png](.assets/article_front_image.png)][article-1]
+
+[article-1]: https://medium.com/google-cloud/cloud-workstations-building-reusable-development-environments-in-cloud-262bc0dcdb57
+
 This is a minimal Pulumi program that provisions the prerequisites for a Google Cloud Workstations
 cluster and a basic workstation config in `us-central1`.
 

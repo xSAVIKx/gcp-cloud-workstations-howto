@@ -1,5 +1,13 @@
 # customized — Pulumi GCP Workstations (using customized images)
 
+Check out [Cloud Workstations: building reusable development environments in cloud - Part 2][article-2]
+article for a complete and step-by-step tutorial.
+
+[![article_front_image.png](.assets/article_front_image.png)][article-2]
+
+[article-2]: https://medium.com/google-cloud/cloud-workstations-building-reusable-development-environments-in-cloud-part-2-90bb14d80ceb
+
+
 This setup provisions a Google Cloud Workstations cluster with customized images.
 
 The program enables required Google APIs automatically and uses Pulumi stack config to determine the
