@@ -55,7 +55,7 @@ RUN bash /installer-scripts/plugin-installer.sh \
 COPY --from=code-oss-image /opt/code-oss /opt/code-oss
 COPY --from=code-oss-image /etc/workstation-startup.d/110_start-code-oss.sh /etc/workstation-startup.d/110_start-code-oss.sh
 
-COPY --from=astral/uv:0.9.8 /uv /uvx /bin/
+COPY --from=astral/uv:0.10.9 /uv /uvx /bin/
 COPY --from=oven/bun:1.3 /usr/local/bin/bun /bin/
 
 COPY 011_customize_user.sh 120_install_vs_code_extensions.sh /etc/workstation-startup.d/

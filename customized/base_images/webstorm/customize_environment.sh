@@ -2,8 +2,8 @@
 
 set -x;
 export DEBIAN_FRONTEND=noninteractive
-export PULUMI_VERSION="3.208.0"
-export CLOUD_SQL_PROXY_VERSION="2.19.0"
+export PULUMI_VERSION="3.225.0"
+export CLOUD_SQL_PROXY_VERSION="2.21.1"
 
 curl -fsSL https://get.pulumi.com | bash -s -- --version "${PULUMI_VERSION}"
 
