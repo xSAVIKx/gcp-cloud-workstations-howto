@@ -10,14 +10,14 @@
     "check": "bunx biome check"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.5",
+    "@biomejs/biome": "^2.4.6",
     "@types/bun": "latest"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^5.9.2"
   },
   "dependencies": {
-    "@pulumi/gcp": "^9.4.0",
-    "@pulumi/pulumi": "^3.207.0"
+    "@pulumi/gcp": "^9.14.0",
+    "@pulumi/pulumi": "^3.225.1"
   }
 }
