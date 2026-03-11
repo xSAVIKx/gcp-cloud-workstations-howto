@@ -28,26 +28,26 @@ RUN apt update \
 
 
 # Install .env - https://plugins.jetbrains.com/plugin/9525--env-files
+    # Install .ignore - https://plugins.jetbrains.com/plugin/7495--ignore
+    # Install google cloud code - https://plugins.jetbrains.com/plugin/8079-google-cloud-code
+    # Install Gemini Code Assist - https://plugins.jetbrains.com/plugin/24198-gemini-code-assist
+    # Install JetBrains AI Assistant - https://plugins.jetbrains.com/plugin/22282-jetbrains-ai-assistant
+    # Install JetBrains Junie - https://plugins.jetbrains.com/plugin/26104-jetbrains-junie
 RUN bash /installer-scripts/plugin-installer.sh \
     -d /opt/WebStorm/plugins/ \
     9525 \
-    # Install .ignore - https://plugins.jetbrains.com/plugin/7495--ignore
     && bash /installer-scripts/plugin-installer.sh \
     -d /opt/WebStorm/plugins/ \
     7495 \
-    # Install google cloud code - https://plugins.jetbrains.com/plugin/8079-google-cloud-code
     && bash /installer-scripts/plugin-installer.sh \
     -d /opt/WebStorm/plugins/ \
     8079 \
-    # Install Gemini Code Assist - https://plugins.jetbrains.com/plugin/24198-gemini-code-assist
     && bash /installer-scripts/plugin-installer.sh \
     -d /opt/WebStorm/plugins/ \
     24198 \
-    # Install JetBrains AI Assistant - https://plugins.jetbrains.com/plugin/22282-jetbrains-ai-assistant
     && bash /installer-scripts/plugin-installer.sh \
     -d /opt/WebStorm/plugins/ \
     22282 \
-    # Install JetBrains Junie - https://plugins.jetbrains.com/plugin/26104-jetbrains-junie
     && bash /installer-scripts/plugin-installer.sh \
     -d /opt/WebStorm/plugins/ \
     26104
